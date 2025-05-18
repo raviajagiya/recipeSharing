@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes</title>
+</head>
+<body>
+
+    <form method="get" action="{{ url_for('auth.recipes') }}">
+        {{ form.hidden_tag() }}
+        <label for="search">Search:</label>
+        {{ form.search() }}
+        {{ form.submit() }}
+    </form>
+
+    <h1>Recipes</h1>
+
+    {% for recipe in recipes %}
+    <div style="margin-bottom: 40px; border-bottom: 1px solid #ccc; padding-bottom: 20px;">
+        <h3>{{ recipe['title'] }}</h3>
+        <p><strong>Ingredients:</strong> {{ recipe['ingredients'] }}</p>
+        <p><strong>Instructions:</strong> {{ recipe['instructions'] }}</p>
+        <p><strong>Category:</strong> {{ recipe['category_name'] or 'Uncategorized' }}</p>
+
+        {% if recipe['image'] %}
+            <img src="data:image/png;base64,{{ recipe['image'] | b64encode }}" alt="Recipe Image" width="300">
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <a href="{{ url_for('auth.submit_recipe') }}">Submit New Recipe</a>
+
+</body>
+</html>

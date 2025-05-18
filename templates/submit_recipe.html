@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit New Recipe</title>
+</head>
+<body>
+    <h1>Submit a New Recipe</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <p>
+            {{ form.title.label }}<br>
+            {{ form.title(size=40) }}
+        </p>
+
+        <p>
+            {{ form.ingredients.label }}<br>
+            {{ form.ingredients(rows=5, cols=40) }}
+        </p>
+
+        <p>
+            {{ form.instructions.label }}<br>
+            {{ form.instructions(rows=5, cols=40) }}
+        </p>
+
+        <p>
+            {{ form.category.label }}<br>
+            {{ form.category() }}
+        </p>
+
+        <p>
+            {{ form.image.label }}<br>
+            {{ form.image() }}
+        </p>
+
+        <p>{{ form.submit() }}</p>
+    </form>
+
+    <p><a href="{{ url_for('auth.recipes') }}">Back to Recipes</a></p>
+</body>
+</html>
